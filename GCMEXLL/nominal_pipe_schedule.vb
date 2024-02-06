@@ -2,8 +2,7 @@
 
 Public Module nominal_pipe_schedule
 
-    <ExcelFunction(Description:="Return pipe nominal ID", Category:="GCME E-PT | Pipe Sch")>
-    Public Function PipeNorminalID(idx As Integer) As String
+    Private Function PipeNorminalID(idx As Integer) As String
         Dim arr = New String() {"1/8", "1/4", "3/8", "1/2", "3/4", "1", "1 1/4", "1 1/2", "2", "2 1/2", "3", "3 1/2", "4", "5", "6", "8", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48"}
 
         PipeNorminalID = arr(idx)
@@ -17,33 +16,29 @@ Public Module nominal_pipe_schedule
         PipeOD = dblNormOD(Array.IndexOf(strNormID, NormID))
     End Function
 
-    <ExcelFunction(Description:="Return pipe schedule", Category:="GCME E-PT | Pipe Sch")>
-    Public Function PipeSchedule(idx As Integer) As String
+    Private Function PipeSchedule(idx As Integer) As String
         Dim arr = New String() {"5", "5S", "10", "10S", "20", "30", "40", "40S", "STD", "60", "80", "80S", "XS", "100", "120", "140", "160", "XXS"}
 
         PipeSchedule = arr(idx)
     End Function
 
-    <ExcelFunction(Description:="Length of pipe nominal ID", Category:="GCME E-PT | Pipe Sch")>
-    Public Function Len_PipeNorminalID() As Integer
+    Private Function Len_PipeNorminalID() As Integer
         Dim arr = New String() {"1/8", "1/4", "3/8", "1/2", "3/4", "1", "1 1/4", "1 1/2", "2", "2 1/2", "3", "3 1/2", "4", "5", "6", "8", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48"}
         Len_PipeNorminalID = arr.Length
     End Function
 
-    <ExcelFunction(Description:="Length of pipe OD", Category:="GCME E-PT | Pipe Sch")>
-    Public Function Len_PipeOD() As Integer
+    Private Function Len_PipeOD() As Integer
         Len_PipeOD = Len_PipeNorminalID()
     End Function
 
-    <ExcelFunction(Description:="Length of pipe schedule", Category:="GCME E-PT | Pipe Sch")>
-    Public Function Len_PipeSchedule() As Integer
+    Private Function Len_PipeSchedule() As Integer
         Dim arr = New String() {"5", "5S", "10", "10S", "20", "30", "40", "40S", "STD", "60", "80", "80S", "XS", "100", "120", "140", "160", "XXS"}
 
         Len_PipeSchedule = arr.Length
     End Function
 
     <ExcelFunction(Description:="Return pipe wall thickness", Category:="GCME E-PT | Pipe Sch")>
-    Public Function PipeThickness(<ExcelArgument(Description:="Norminal Pipe ID")> NormID As String, <ExcelArgument(Description:="Pipe Schedule")> Sch As String) As Double
+    Public Function PipeThickness(<ExcelArgument(Description:="Norminal Pipe ID")> NormID As String, <ExcelArgument(Description:="Pipe Schedule")> Optional Sch As String = "STD") As Double
         Dim strNormID = New String() {"1/8", "1/4", "3/8", "1/2", "3/4", "1", "1 1/4", "1 1/2", "2", "2 1/2", "3", "3 1/2", "4", "5", "6", "8", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48"}
         Dim strSchedule = New String() {"5", "5S", "10", "10S", "20", "30", "40", "40S", "STD", "60", "80", "80S", "XS", "100", "120", "140", "160", "XXS"}
 
@@ -95,8 +90,8 @@ Public Module nominal_pipe_schedule
         PipeID = od - 2 * tck
     End Function
 
-    <ExcelFunction(Description:="Return available pipe schedule for input norminal ID", Category:="GCME E-PT | Pipe Sch")>
-    Public Function AvailableSchedule(<ExcelArgument(Description:="Norminal Pipe ID")> NormID As String) As String
+    '<ExcelFunction(Description:="Return available pipe schedule for input norminal ID", Category:="GCME E-PT | Pipe Sch")>
+    Private Function AvailableSchedule(<ExcelArgument(Description:="Norminal Pipe ID")> NormID As String) As String
         Dim S1 As String
         Dim i As Integer
 

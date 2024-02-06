@@ -144,11 +144,11 @@ Public Module flow_meter
     Const CONE_METER = "cone meter"
     Const WEDGE_METER = "wedge meter"
 
-    Function IsInArray(stringToBeFound As String, arr As Array) As Boolean
+    Private Function IsInArray(stringToBeFound As String, arr As Array) As Boolean
         IsInArray = Array.IndexOf(arr, stringToBeFound) > 0
     End Function
 
-    Function IsInBetaSimpleMeter(mtype As String) As Boolean
+    Private Function IsInBetaSimpleMeter(mtype As String) As Boolean
         Dim beta_simple_meters = New String() {ISO_5167_ORIFICE, ISO_15377_ECCENTRIC_ORIFICE,
                               ISO_15377_CONICAL_ORIFICE, ISO_15377_QUARTER_CIRCLE_ORIFICE,
                               MILLER_ORIFICE, MILLER_ECCENTRIC_ORIFICE,
@@ -228,6 +228,7 @@ Public Module flow_meter
 
     End Function
 
+    <ExcelFunction(Description:="calculate orifice expansibility", Category:="GCME E-PT | Orifice")>
     Public Function Orifice_expansibility(D, D0, P1, P2, k) As Double
         '    Calculates the expansibility factor for orifice plate calculations
         '    based on the geometry of the plate, measured pressures of the orifice, and
@@ -289,7 +290,7 @@ Public Module flow_meter
 
     End Function
 
-    Function Orifice_expansibility_1989(D, D0, P1, P2, k) As Double
+    Private Function Orifice_expansibility_1989(D, D0, P1, P2, k) As Double
         '    Calculates the expansibility factor for orifice plate calculations
         '    based on the geometry of the plate, measured pressures of the orifice, and
         '    the isentropic exponent of the fluid.
@@ -359,6 +360,7 @@ Public Module flow_meter
 
     End Function
 
+    <ExcelFunction(Description:="Calculate coefficient of discharge of the orifice", Category:="GCME E-PT | Orifice")>
     Public Function C_Reader_Harris_Gallagher(D, D0, rho, mu, m, Optional taps = "D and D/2") As Double
         '    Calculates the coefficient of discharge of the orifice based on the
         '    geometry of the plate, measured pressures of the orifice, mass flow rate
@@ -533,7 +535,7 @@ Public Module flow_meter
         C_Reader_Harris_Gallagher = c
     End Function
 
-    Function C_Miller_1996(D As Double, D0 As Double, rho As Double, mu As Double, m As Double, subtype As String, taps As String, tap_position As String) As Double
+    Private Function C_Miller_1996(D As Double, D0 As Double, rho As Double, mu As Double, m As Double, subtype As String, taps As String, tap_position As String) As Double
         '    Calculates the coefficient of discharge of any of the orifice types
         '    supported by the Miller (1996) [1]_ correlation set. These correlations
         '    cover a wide range of industrial applications and sizes. Most of them are
@@ -875,7 +877,7 @@ Public Module flow_meter
 
     End Function
 
-    Function C_eccentric_orifice_ISO_15377_1998(D, D0) As Double
+    Private Function C_eccentric_orifice_ISO_15377_1998(D, D0) As Double
         '    Calculates the coefficient of discharge of an eccentric orifice based
         '    on the geometry of the plate according to ISO 15377, first introduced in
         '    1998 and also presented in the second 2007 edition. It also appears in BS
@@ -951,7 +953,7 @@ Public Module flow_meter
 
     End Function
 
-    Function C_quarter_circle_orifice_ISO_15377_1998(D, D0) As Double
+    Private Function C_quarter_circle_orifice_ISO_15377_1998(D, D0) As Double
         '    Calculates the coefficient of discharge of a quarter circle orifice based
         '    on the geometry of the plate according to ISO 15377, first introduced in
         '    1998 and also presented in the second 2007 edition. It also appears in BS
@@ -1014,7 +1016,7 @@ Public Module flow_meter
 
     End Function
 
-    Function Discharge_coefficient_to_K(D, D0, c) As Double
+    Private Function Discharge_coefficient_to_K(D, D0, c) As Double
         '    Converts a discharge coefficient to a standard loss coefficient,
         '    for use in computation of the actual pressure drop of an orifice or other
         '    device.
@@ -1066,7 +1068,7 @@ Public Module flow_meter
 
     End Function
 
-    Function K_to_discharge_coefficient(D, D0, k) As Double
+    Private Function K_to_discharge_coefficient(D, D0, k) As Double
         '    Converts a standard loss coefficient to a discharge coefficient.
         '
         '    .. math::
@@ -1121,7 +1123,7 @@ Public Module flow_meter
 
     End Function
 
-    Function DP_orifice(D, D0, P1, P2, c) As Double
+    Private Function DP_orifice(D, D0, P1, P2, c) As Double
         '    Calculates the non-recoverable pressure drop of an orifice plate based
         '    on the pressure drop and the geometry of the plate and the discharge
         '    coefficient.
@@ -1183,7 +1185,7 @@ Public Module flow_meter
 
     End Function
 
-    Function Velocity_of_approach_factor(D, D0) As Double
+    Private Function Velocity_of_approach_factor(D, D0) As Double
         '    Calculates a factor for orifice plate design called the `velocity of
         '    approach`.
         '
@@ -1219,7 +1221,7 @@ Public Module flow_meter
 
     End Function
 
-    Function Flow_coefficient(D, D0, c) As Double
+    Private Function Flow_coefficient(D, D0, c) As Double
         '    Calculates a factor for differential pressure flow meter design called
         '    the `flow coefficient`. This should not be confused with the flow
         '    coefficient often used when discussing valves.
@@ -1266,7 +1268,7 @@ Public Module flow_meter
     End Function
 
 
-    Function Nozzle_expansibility(D, D0, P1, P2, k, Optional beta = 0) As Double
+    Private Function Nozzle_expansibility(D, D0, P1, P2, k, Optional beta = 0) As Double
         '    Calculates the expansibility factor for a nozzle or venturi nozzle,
         '    based on the geometry of the plate, measured pressures of the orifice, and
         '    the isentropic exponent of the fluid.
@@ -1378,7 +1380,7 @@ Public Module flow_meter
     End Function
 
 
-    Function C_long_radius_nozzle(D, D0, rho, mu, m) As Double
+    Private Function C_long_radius_nozzle(D, D0, rho, mu, m) As Double
         '    Calculates the coefficient of discharge of a long radius nozzle used
         '    for measuring flow rate of fluid, based on the geometry of the nozzle,
         '    mass flow rate through the nozzle, and the density and viscosity of the
@@ -1430,7 +1432,7 @@ Public Module flow_meter
 
     End Function
 
-    Function C_ISA_1932_nozzle(D, D0, rho, mu, m) As Double
+    Private Function C_ISA_1932_nozzle(D, D0, rho, mu, m) As Double
         '    Calculates the coefficient of discharge of an ISA 1932 style nozzle
         '    used for measuring flow rate of fluid, based on the geometry of the nozzle,
         '    mass flow rate through the nozzle, and the density and viscosity of the
@@ -1483,7 +1485,7 @@ Public Module flow_meter
 
     End Function
 
-    Function C_venturi_nozzle(D, D0) As Double
+    Private Function C_venturi_nozzle(D, D0) As Double
         '    Calculates the coefficient of discharge of an Venturi style nozzle
         '    used for measuring flow rate of fluid, based on the geometry of the nozzle.
         '
@@ -1522,7 +1524,7 @@ Public Module flow_meter
 
     End Function
 
-    Function DP_venturi_tube(D, D0, P1, P2) As Double
+    Private Function DP_venturi_tube(D, D0, P1, P2) As Double
         '    Calculates the non-recoverable pressure drop of a venturi tube
         '    differential pressure meter based on the pressure drop and the geometry of
         '    the venturi meter.
@@ -1629,7 +1631,7 @@ Public Module flow_meter
 
     End Function
 
-    Function Diameter_ratio_cone_meter(D, Dc) As Double
+    Private Function Diameter_ratio_cone_meter(D, Dc) As Double
         '    Calculates the diameter ratio `beta` used to characterize a cone
         '    flow meter.
         '
@@ -1671,7 +1673,7 @@ Public Module flow_meter
 
     End Function
 
-    Function Cone_meter_expansibility_Stewart(D, Dc, P1, P2, k) As Double
+    Private Function Cone_meter_expansibility_Stewart(D, Dc, P1, P2, k) As Double
         '    Calculates the expansibility factor for a cone flow meter,
         '    based on the geometry of the cone meter, measured pressures of the orifice,
         '    and the isentropic exponent of the fluid. Developed in [1]_, also shown
@@ -1728,7 +1730,7 @@ Public Module flow_meter
 
     End Function
 
-    Function DP_cone_meter(D, Dc, P1, P2) As Double
+    Private Function DP_cone_meter(D, Dc, P1, P2) As Double
         '    Calculates the non-recoverable pressure drop of a cone meter
         '    based on the measured pressures before and at the cone end, and the
         '    geometry of the cone meter according to [1]_.
@@ -1777,7 +1779,7 @@ Public Module flow_meter
 
     End Function
 
-    Function Diameter_ratio_wedge_meter(D, h) As Double
+    Private Function Diameter_ratio_wedge_meter(D, h) As Double
         '    Calculates the diameter ratio `beta` used to characterize a wedge
         '    flow meter as given in [1]_ and [2]_.
         '
@@ -1829,7 +1831,7 @@ Public Module flow_meter
 
     End Function
 
-    Function C_wedge_meter_Miller(D, h) As Double
+    Private Function C_wedge_meter_Miller(D, h) As Double
         '    Calculates the coefficient of discharge of an wedge flow meter
         '    used for measuring flow rate of fluid, based on the geometry of the
         '    differential pressure flow meter.
@@ -1902,7 +1904,7 @@ Public Module flow_meter
 
     End Function
 
-    Function C_wedge_meter_ISO_5167_6_2017(D, h) As Double
+    Private Function C_wedge_meter_ISO_5167_6_2017(D, h) As Double
         '    Calculates the coefficient of discharge of an wedge flow meter
         '    used for measuring flow rate of fluid, based on the geometry of the
         '    differential pressure flow meter according to the ISO 5167-6 standard
@@ -1955,7 +1957,7 @@ Public Module flow_meter
 
     End Function
 
-    Function DP_wedge_meter(D, h, P1, P2) As Double
+    Private Function DP_wedge_meter(D, h, P1, P2) As Double
         '    Calculates the non-recoverable pressure drop of a wedge meter
         '    based on the measured pressures before and at the wedge meter, and the
         '    geometry of the wedge meter according to [1]_.
@@ -2002,7 +2004,7 @@ Public Module flow_meter
 
     End Function
 
-    Function C_Reader_Harris_Gallagher_wet_venturi_tube(mg, ml, rhog, rhol, D, D0, h) As Double
+    Private Function C_Reader_Harris_Gallagher_wet_venturi_tube(mg, ml, rhog, rhol, D, D0, h) As Double
         '    Calculates the coefficient of discharge of the wet gas venturi tube
         '    based on the  geometry of the tube, mass flow rates of liquid and vapor
         '    through the tube, the density of the liquid and gas phases, and an
@@ -2114,7 +2116,7 @@ Public Module flow_meter
 
     End Function
 
-    Function DP_Reader_Harris_Gallagher_wet_venturi_tube(D, D0, P1, P2, ml, mg, rhol, rhog, h) As Double
+    Private Function DP_Reader_Harris_Gallagher_wet_venturi_tube(D, D0, P1, P2, ml, mg, rhol, rhog, h) As Double
         '    Calculates the non-recoverable pressure drop of a wet gas venturi
         '    nozzle based on the pressure drop and the geometry of the venturi nozzle,
         '    the mass flow rates of liquid and gas through it, the densities of the
@@ -2205,7 +2207,7 @@ Public Module flow_meter
 
     End Function
 
-    Function Froude_densimetric(V, l, rho1, rho2, Optional heavy = True) As Double
+    Private Function Froude_densimetric(V, l, rho1, rho2, Optional heavy = True) As Double
         '    Calculates the densimetric Froude number :math:`Fr_{den}` for velocity
         '    `V` geometric length `L`, heavier fluid density `rho1`, and lighter fluid
         '    density `rho2`. If desired, gravity can be specified as well. Depending on
@@ -2280,7 +2282,7 @@ Public Module flow_meter
 
     End Function
 
-    Function Differential_pressure_meter_beta(D As Double, D2 As Double, meter_type As String)
+    Private Function Differential_pressure_meter_beta(D As Double, D2 As Double, meter_type As String)
         '    Calculates the beta ratio of a differential pressure meter.
         '
         '    Parameters
@@ -2330,7 +2332,7 @@ Public Module flow_meter
 
     End Function
 
-    Function Orifice_std_Hollingshead_tck(x, y)
+    Private Function Orifice_std_Hollingshead_tck(x, y)
 
         Dim tx, ty, c, kx, ky, Z
 
@@ -2362,7 +2364,7 @@ Public Module flow_meter
 
     End Function
 
-    Function Cone_Hollingshead_tck(x, y)
+    Private Function Cone_Hollingshead_tck(x, y)
 
         Dim tx, ty, c, kx, ky, Z
 
@@ -2394,7 +2396,7 @@ Public Module flow_meter
 
     End Function
 
-    Function Wedge_Hollingshead_tck(x, y)
+    Private Function Wedge_Hollingshead_tck(x, y)
 
         Dim tx, ty, c, kx, ky, Z
 
@@ -2419,7 +2421,7 @@ Public Module flow_meter
 
     End Function
 
-    Function Fpbspl(T, n, k, x, l, ByRef h, ByRef hh)
+    Private Function Fpbspl(T, n, k, x, l, ByRef h, ByRef hh)
         Dim i, j, li, f
 
         h(0) = n
@@ -2448,7 +2450,7 @@ Public Module flow_meter
 
     End Function
 
-    Function Init_w(T, k, x, lx, ByRef w)
+    Private Function Init_w(T, k, x, lx, ByRef w)
         Dim tb, n, m, h, hh, te, l1, l2, i, j, arg, arg_temp
 
         tb = T(k)
@@ -2486,7 +2488,7 @@ Public Module flow_meter
 
     End Function
 
-    Function Cy_bispev(tx, ty, c, kx, ky, x, y)
+    Private Function Cy_bispev(tx, ty, c, kx, ky, x, y)
         Dim nx, ny, mx, my, kx1, ky1, nkx1, nky1, wx, wy, lx, ly
         Dim size_z, Z, i, j, i1, j1, sp, err, l2, a, tmp
 
@@ -2533,7 +2535,7 @@ Public Module flow_meter
         Cy_bispev = Z
     End Function
 
-    Function Differential_pressure_meter_C_epsilon(D As Double, D2 As Double, m As Double, P1 As Double, P2 As Double, rho As Double, mu As Double, k As Double, meter_type As String, taps As String, tap_position As String, Optional C_specified As Double = 0.0, Optional epsilon_specified As Double = 0.0)
+    Private Function Differential_pressure_meter_C_epsilon(D As Double, D2 As Double, m As Double, P1 As Double, P2 As Double, rho As Double, mu As Double, k As Double, meter_type As String, taps As String, tap_position As String, Optional C_specified As Double = 0.0, Optional epsilon_specified As Double = 0.0)
         '    Calculates the discharge coefficient and expansibility of a flow
         '    meter given the mass flow rate, the upstream pressure, the second
         '    pressure value, and the orifice diameter for a differential
@@ -2825,7 +2827,7 @@ Public Module flow_meter
 
     End Function
 
-    Function Err_dp_meter_solver(D As Double, D2 As Double, m As Double, P1 As Double, P2 As Double, rho As Double, mu As Double, k As Double, meter_type As String, taps As String, tap_position As String, Optional C_specified As Double = 0.0, Optional epsilon_specified As Double = 0.0) As Double
+    Private Function Err_dp_meter_solver(D As Double, D2 As Double, m As Double, P1 As Double, P2 As Double, rho As Double, mu As Double, k As Double, meter_type As String, taps As String, tap_position As String, Optional C_specified As Double = 0.0, Optional epsilon_specified As Double = 0.0) As Double
 
         Dim c, epsilon, m_cal
         Dim Results
@@ -2840,7 +2842,7 @@ Public Module flow_meter
 
     End Function
 
-    Public Function DP_meter_solver_m(D1 As Double, D2 As Double, P1 As Double, P2 As Double, rho As Double, mu As Double, k As Double, Optional meter_type As String = "orifice", Optional taps As String = "D and D/2", Optional tap_position As String = "180 degree", Optional C_specified As Double = 0.0, Optional epsilon_specified As Double = 0.0) As Double
+    Private Function DP_meter_solver_m(D1 As Double, D2 As Double, P1 As Double, P2 As Double, rho As Double, mu As Double, k As Double, Optional meter_type As String = "orifice", Optional taps As String = "D and D/2", Optional tap_position As String = "180 degree", Optional C_specified As Double = 0.0, Optional epsilon_specified As Double = 0.0) As Double
 
         Dim m As Double
         Dim m_calc As Double
@@ -2868,7 +2870,7 @@ Public Module flow_meter
 
     End Function
 
-    Public Function DP_meter_solver_D2(D1 As Double, m As Double, P1 As Double, P2 As Double, rho As Double, mu As Double, k As Double, Optional meter_type As String = "orifice", Optional taps As String = "corner", Optional tap_position As String = "180 degree", Optional C_specified As Double = 0.0, Optional epsilon_specified As Double = 0.0) As Double
+    Private Function DP_meter_solver_D2(D1 As Double, m As Double, P1 As Double, P2 As Double, rho As Double, mu As Double, k As Double, Optional meter_type As String = "orifice", Optional taps As String = "corner", Optional tap_position As String = "180 degree", Optional C_specified As Double = 0.0, Optional epsilon_specified As Double = 0.0) As Double
 
         Dim a, b, c, d, f_a, f_b, f_c, s, f_s, mflag, delta
         Dim flag1, flag2, flag3, flag4, flag5
@@ -2943,7 +2945,7 @@ Public Module flow_meter
 
     End Function
 
-    Public Function DP_meter_solver_P1(D1 As Double, D2 As Double, m As Double, P2 As Double, rho As Double, mu As Double, k As Double, Optional meter_type As String = "orifice", Optional taps As String = "corner", Optional tap_position As String = "180 degree", Optional C_specified As Double = 0.0, Optional epsilon_specified As Double = 0.0) As Double
+    Private Function DP_meter_solver_P1(D1 As Double, D2 As Double, m As Double, P2 As Double, rho As Double, mu As Double, k As Double, Optional meter_type As String = "orifice", Optional taps As String = "corner", Optional tap_position As String = "180 degree", Optional C_specified As Double = 0.0, Optional epsilon_specified As Double = 0.0) As Double
 
         Dim a, b, c, d, f_a, f_b, f_c, s, f_s, mflag, delta As Double
         Dim flag1, flag2, flag3, flag4, flag5
@@ -3018,7 +3020,7 @@ Public Module flow_meter
 
     End Function
 
-    Public Function DP_meter_solver_P2(D1 As Double, D2 As Double, m As Double, P1 As Double, rho As Double, mu As Double, k As Double, Optional meter_type As String = "orifice", Optional taps As String = "corner", Optional tap_position As String = "180 degree", Optional C_specified As Double = 0.0, Optional epsilon_specified As Double = 0.0) As Double
+    Private Function DP_meter_solver_P2(D1 As Double, D2 As Double, m As Double, P1 As Double, rho As Double, mu As Double, k As Double, Optional meter_type As String = "orifice", Optional taps As String = "corner", Optional tap_position As String = "180 degree", Optional C_specified As Double = 0.0, Optional epsilon_specified As Double = 0.0) As Double
 
         Dim a, b, c, D, f_a, f_b, f_c, s, f_s, mflag, delta
         Dim flag1, flag2, flag3, flag4, flag5

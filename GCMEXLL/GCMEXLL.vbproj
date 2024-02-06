@@ -70,6 +70,22 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\TestApp01\TestApp01\Convert.vb">
+      <Link>Convert.vb</Link>
+    </Compile>
+    <Compile Include="..\..\TestApp01\TestApp01\Parser.vb">
+      <Link>Parser.vb</Link>
+    </Compile>
+    <Compile Include="..\..\TestApp01\TestApp01\Quantity.vb">
+      <Link>Quantity.vb</Link>
+    </Compile>
+    <Compile Include="..\..\TestApp01\TestApp01\UnitPrefix.vb">
+      <Link>UnitPrefix.vb</Link>
+    </Compile>
+    <Compile Include="..\..\TestApp01\TestApp01\Units.vb">
+      <Link>Units.vb</Link>
+    </Compile>
+    <Compile Include="control_valve.vb" />
     <Compile Include="ExcelDNAInt.vb" />
     <Compile Include="flow_meter.vb" />
     <Compile Include="nominal_pipe_schedule.vb" />
