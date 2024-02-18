@@ -1,7 +1,6 @@
-﻿Imports System.Security.Cryptography
-Imports ExcelDna.Integration
+﻿Imports ExcelDna.Integration
 
-Public Module control_valve
+Public Module Control_valve
     Const MWair As Double = 28.96443
 
     Private Function Valve_fx_linear(x As Double) As Double

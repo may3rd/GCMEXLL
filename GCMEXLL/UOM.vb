@@ -551,7 +551,15 @@ Public Module UOM
 
     <ExcelFunction(Description:="convert UOM", Category:="GCME E-PT | Unit Convertion")>
     Public Function UOM_CONVERT(<ExcelArgument(Description:="measurement")> val As Double, <ExcelArgument(Description:="Original UOM")> fromUnit As String, <ExcelArgument(Description:="final UOM")> toUnit As String) As Double
-        Return ConvertDbl(CStr(val) + " " + fromUnit, toUnit)
+        Dim result As Double = -999.99
+
+        Try
+            result = ConvertDbl(CStr(val) + " " + fromUnit, toUnit)
+        Catch ex As Exception
+
+        End Try
+
+        Return result
     End Function
 
 End Module

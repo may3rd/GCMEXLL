@@ -85,11 +85,12 @@
     <Compile Include="..\..\TestApp01\TestApp01\Units.vb">
       <Link>Units.vb</Link>
     </Compile>
-    <Compile Include="control_valve.vb" />
+    <Compile Include="Control_valve.vb" />
     <Compile Include="ExcelDNAInt.vb" />
     <Compile Include="flow_meter.vb" />
     <Compile Include="nominal_pipe_schedule.vb" />
     <Compile Include="numerical.vb" />
+    <Compile Include="safety_valve.vb" />
     <Compile Include="UOM.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
