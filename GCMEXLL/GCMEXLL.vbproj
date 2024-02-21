@@ -50,6 +50,22 @@
     <Reference Include="ExcelDna.Integration, Version=1.1.0.0, Culture=neutral, PublicKeyToken=f225e9659857edbe, processorArchitecture=MSIL">
       <HintPath>..\packages\ExcelDna.Integration.1.7.0\lib\net452\ExcelDna.Integration.dll</HintPath>
     </Reference>
+    <Reference Include="ExcelDna.IntelliSense, Version=1.1.0.0, Culture=neutral, PublicKeyToken=f225e9659857edbe, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDna.IntelliSense.1.7.0\lib\net452\ExcelDna.IntelliSense.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDna.Interop.15.0.1\lib\net452\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Vbe.Interop, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDna.Interop.15.0.1\lib\net452\Microsoft.Vbe.Interop.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Office, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDna.Interop.15.0.1\lib\net452\Office.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -59,6 +75,13 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
+    <Import Include="ExcelDna.ComInterop" />
+    <Import Include="ExcelDna.Integration" />
+    <Import Include="ExcelDna.Integration.CustomUI" />
+    <Import Include="ExcelDna.Integration.Extensibility" />
+    <Import Include="ExcelDna.Integration.Rtd" />
+    <Import Include="ExcelDna.Logging" />
+    <Import Include="ExcelDna.Serialization" />
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
     <Import Include="System.Collections" />
@@ -70,26 +93,16 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\TestApp01\TestApp01\Convert.vb">
-      <Link>Convert.vb</Link>
-    </Compile>
-    <Compile Include="..\..\TestApp01\TestApp01\Parser.vb">
-      <Link>Parser.vb</Link>
-    </Compile>
-    <Compile Include="..\..\TestApp01\TestApp01\Quantity.vb">
-      <Link>Quantity.vb</Link>
-    </Compile>
-    <Compile Include="..\..\TestApp01\TestApp01\UnitPrefix.vb">
-      <Link>UnitPrefix.vb</Link>
-    </Compile>
-    <Compile Include="..\..\TestApp01\TestApp01\Units.vb">
-      <Link>Units.vb</Link>
-    </Compile>
     <Compile Include="control_valve.vb" />
+    <Compile Include="Convert.vb" />
     <Compile Include="ExcelDNAInt.vb" />
     <Compile Include="flow_meter.vb" />
     <Compile Include="nominal_pipe_schedule.vb" />
     <Compile Include="numerical.vb" />
+    <Compile Include="Parser.vb" />
+    <Compile Include="Quantity.vb" />
+    <Compile Include="UnitPrefix.vb" />
+    <Compile Include="Units.vb" />
     <Compile Include="UOM.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -137,6 +150,8 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\ExcelDna.AddIn.1.7.0\build\ExcelDna.AddIn.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ExcelDna.AddIn.1.7.0\build\ExcelDna.AddIn.props'))" />
     <Error Condition="!Exists('..\packages\ExcelDna.AddIn.1.7.0\build\ExcelDna.AddIn.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ExcelDna.AddIn.1.7.0\build\ExcelDna.AddIn.targets'))" />
+    <Error Condition="!Exists('..\packages\ExcelDna.Interop.15.0.1\build\ExcelDna.Interop.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ExcelDna.Interop.15.0.1\build\ExcelDna.Interop.targets'))" />
   </Target>
   <Import Project="..\packages\ExcelDna.AddIn.1.7.0\build\ExcelDna.AddIn.targets" Condition="Exists('..\packages\ExcelDna.AddIn.1.7.0\build\ExcelDna.AddIn.targets')" />
+  <Import Project="..\packages\ExcelDna.Interop.15.0.1\build\ExcelDna.Interop.targets" Condition="Exists('..\packages\ExcelDna.Interop.15.0.1\build\ExcelDna.Interop.targets')" />
 </Project>
